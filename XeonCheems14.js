@@ -213,10 +213,14 @@ var xeonytimewisher = `Good Morning 🌄`
 //function
 const reSize = async(buffer, ukur1, ukur2) => {
    return new Promise(async(resolve, reject) => {
-      let jimp = require('jimp')
-      var baper = await jimp.read(buffer);
-      var ab = await baper.resize(ukur1, ukur2).getBufferAsync(jimp.MIME_JPEG)
-      resolve(ab)
+      try {
+         const { Jimp } = require('jimp')
+         var baper = await Jimp.read(buffer)
+         var ab = await baper.resize({ w: ukur1, h: ukur2 }).getBuffer('image/jpeg')
+         resolve(ab)
+      } catch (err) {
+         reject(err)
+      }
    })
 }
 //module
@@ -21349,822 +21353,823 @@ break
 │❏${xprefix}𝐎𝐓𝐇𝐄𝐑𝐌𝐄𝐍𝐔
 └─────────────────┈ ⳹`
 await XeonBotInc.sendMessage(m.chat, { react: { text: `📃`, key: m.key }})
-if (typemenu === 'v1') {
+// if (typemenu === 'v1') {
                   XeonBotInc.sendMessage(m.chat, {
-                      image: fs.readFileSync('./XeonMedia/theme/thumb.png'),
-                      caption: xmenu_oh
+                      // image: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+                      text: xmenu_oh
                   }, {
                       quoted: m
                   })
-              } else if (typemenu === 'v2') {
-                  XeonBotInc.sendMessage(m.chat, {
-                      text: xmenu_oh,
-                      contextInfo: {
-                          externalAdReply: {
-                              showAdAttribution: true,
-                              title: botname,
-                              body: ownername,
-                              thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
-                              sourceUrl: websitex,
-                              mediaType: 1,
-                              renderLargerThumbnail: true
-                          }
-                      }
-                  }, {
-                      quoted: m
-                  })
-              }   if (typemenu === 'v3') {
-                 let vthumb =fs.readFileSync('./XeonMedia/theme/thumb.png')
-                  XeonBotInc.sendMessage(m.chat, {
-                      video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
-                      thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
-                      caption: xmenu_oh,
-                  }, {
-                      quoted: m
-                  })
-              } else if (typemenu === 'v4') {
-                  XeonBotInc.sendMessage(m.chat, {
-                      video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
-                      caption: xmenu_oh,
-                      gifPlayback: true
-                  }, {
-                      quoted: m
-                  })
-              } else if (typemenu === 'v5') {
-                  XeonBotInc.relayMessage(m.chat, {
-                      scheduledCallCreationMessage: {
-                          callType: "AUDIO",
-                          scheduledTimestampMs: 1200,
-                          title: xmenu_oh
-                      }
-                  }, {})
-              } else if (typemenu === 'v6') {
-                  XeonBotInc.relayMessage(m.chat,  {
-                     requestPaymentMessage: {
-                        currencyCodeIso4217: 'INR',
-                        amount1000: '9999999900',
-                        requestFrom: m.sender,
-                        noteMessage: {
-                           extendedTextMessage: {
-                              text: xmenu_oh,
-                              contextInfo: {
-                                 externalAdReply: {
-                                     showAdAttribution: true
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }, {})
-              } else if (typemenu === 'v7') {
-                  XeonBotInc.sendMessage(m.chat, {
-                    document: {
-                      url: thumbimage_url
-                   },
-                      caption: xmenu_oh,
-                      mimetype: 'application/zip',
-                      fileName: ownername,
-                      fileLength: "99999999999",
-                      contextInfo: {
-                          externalAdReply: {
-                              showAdAttribution: true,
-                              title: botname,
-                              body: ownername,
-                              thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
-                              sourceUrl: websitex,
-                              mediaType: 1,
-                              renderLargerThumbnail: true
-                          }
-                      }
-                  }, {
-                      quoted: fstatus 
-                  })
-              } else if (typemenu === 'v8') {
-                XeonBotInc.sendMessage(m.chat, {
-    video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
-    gifPlayback: true,
-    caption: xmenu_oh,
-    contextInfo: {
-    externalAdReply: {
-    title: botname,
-    body: ownername,
-    thumbnailUrl: thumbimage_url,
-    sourceUrl: ``,
-    mediaType: 1,
-    renderLargerThumbnail: true
-    }
-    }}, {
-                      quoted: m
-                  })
-    } else if (typemenu === 'v9') {
-                XeonBotInc.sendMessage(m.chat, {
-video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
-caption: xmenu_oh,
-gifPlayback: true,
-contextInfo: {
-forwardingScore: 999,
-isForwarded: true,
-mentionedJid: [sender],
-forwardedNewsletterMessageInfo: {
-newsletterName: ownername,
-newsletterJid: "120363222395675670@newsletter",
-},
-externalAdReply: {
-showAdAttribution: true,
-title: ownername,
-body: botname,
-thumbnailUrl: "https://assets.telegraphindia.com/abp/2022/Jun/1655905064_roddur.jpg",
-sourceUrl: websitex,
-mediaType: 1,
-renderLargerThumbnail: true
-}
-}
-}, {
-quoted: m
-})
-} else if (typemenu === 'v10') {
-let msg = generateWAMessageFromContent(from, {
-viewOnceMessage: {
-  message: {
-      "messageContextInfo": {
-        "deviceListMetadata": {},
-        "deviceListMetadataVersion": 2
-      },
-      interactiveMessage: proto.Message.InteractiveMessage.create({
-        body: proto.Message.InteractiveMessage.Body.create({
-          text: ownername
-        }),
-        footer: proto.Message.InteractiveMessage.Footer.create({
-          text: botname
-        }),
-        header: proto.Message.InteractiveMessage.Header.create({
-          title: xmenu_oh,
-          subtitle: themeemoji,
-          hasMediaAttachment: false
-        }),
-        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-          buttons: [
-             {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"Facebook\",\"url\":\"https://www.facebook.com/Debashi.Dey.X2\",\"merchant_url\":\"https://www.google.com\"}"
-            },
-            {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"Instagram 💧\",\"url\":\"https://www.instagram.com/debashis_x1\",\"merchant_url\":\"https://www.google.com\"}"
-            },
-            {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"GitHub 🔘\",\"url\":\"https://github.com/DebashisX3\",\"merchant_url\":\"https://www.google.com\"}"
-            },
-            {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"WhatsApp 🪀\",\"url\":\"https://wa.me/qr/ZPZ7Z6WYJ752O1\",\"merchant_url\":\"https://www.google.com\"}"
-            },              
-            {
-"name": "quick_reply",
-"buttonParamsJson": `{"display_text":"Allmenu 🗂️","id":"${prefix}allmenu"}`
- },
-            {
-              "name": "quick_reply",
-              "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
-            },
-            {
-              "name": "quick_reply",
-              "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
-            }
-         ],
-        })
-      })
-  }
-}
-}, {})
+//               }
+// else if (typemenu === 'v2') {
+//                   XeonBotInc.sendMessage(m.chat, {
+//                       text: xmenu_oh,
+//                       contextInfo: {
+//                           externalAdReply: {
+//                               showAdAttribution: true,
+//                               title: botname,
+//                               body: ownername,
+//                               thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+//                               sourceUrl: websitex,
+//                               mediaType: 1,
+//                               renderLargerThumbnail: true
+//                           }
+//                       }
+//                   }, {
+//                       quoted: m
+//                   })
+//               }   if (typemenu === 'v3') {
+//                  let vthumb =fs.readFileSync('./XeonMedia/theme/thumb.png')
+//                   XeonBotInc.sendMessage(m.chat, {
+//                       video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+//                       thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+//                       caption: xmenu_oh,
+//                   }, {
+//                       quoted: m
+//                   })
+//               } else if (typemenu === 'v4') {
+//                   XeonBotInc.sendMessage(m.chat, {
+//                       video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+//                       caption: xmenu_oh,
+//                       gifPlayback: true
+//                   }, {
+//                       quoted: m
+//                   })
+//               } else if (typemenu === 'v5') {
+//                   XeonBotInc.relayMessage(m.chat, {
+//                       scheduledCallCreationMessage: {
+//                           callType: "AUDIO",
+//                           scheduledTimestampMs: 1200,
+//                           title: xmenu_oh
+//                       }
+//                   }, {})
+//               } else if (typemenu === 'v6') {
+//                   XeonBotInc.relayMessage(m.chat,  {
+//                      requestPaymentMessage: {
+//                         currencyCodeIso4217: 'INR',
+//                         amount1000: '9999999900',
+//                         requestFrom: m.sender,
+//                         noteMessage: {
+//                            extendedTextMessage: {
+//                               text: xmenu_oh,
+//                               contextInfo: {
+//                                  externalAdReply: {
+//                                      showAdAttribution: true
+//                                  }
+//                               }
+//                            }
+//                         }
+//                      }
+//                   }, {})
+//               } else if (typemenu === 'v7') {
+//                   XeonBotInc.sendMessage(m.chat, {
+//                     document: {
+//                       url: thumbimage_url
+//                    },
+//                       caption: xmenu_oh,
+//                       mimetype: 'application/zip',
+//                       fileName: ownername,
+//                       fileLength: "99999999999",
+//                       contextInfo: {
+//                           externalAdReply: {
+//                               showAdAttribution: true,
+//                               title: botname,
+//                               body: ownername,
+//                               thumbnail: fs.readFileSync('./XeonMedia/theme/thumb.png'),
+//                               sourceUrl: websitex,
+//                               mediaType: 1,
+//                               renderLargerThumbnail: true
+//                           }
+//                       }
+//                   }, {
+//                       quoted: fstatus 
+//                   })
+//               } else if (typemenu === 'v8') {
+//                 XeonBotInc.sendMessage(m.chat, {
+//     video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+//     gifPlayback: true,
+//     caption: xmenu_oh,
+//     contextInfo: {
+//     externalAdReply: {
+//     title: botname,
+//     body: ownername,
+//     thumbnailUrl: thumbimage_url,
+//     sourceUrl: ``,
+//     mediaType: 1,
+//     renderLargerThumbnail: true
+//     }
+//     }}, {
+//                       quoted: m
+//                   })
+//     } else if (typemenu === 'v9') {
+//                 XeonBotInc.sendMessage(m.chat, {
+// video: fs.readFileSync('./XeonMedia/theme/Cheems-bot.mp4'),
+// caption: xmenu_oh,
+// gifPlayback: true,
+// contextInfo: {
+// forwardingScore: 999,
+// isForwarded: true,
+// mentionedJid: [sender],
+// forwardedNewsletterMessageInfo: {
+// newsletterName: ownername,
+// newsletterJid: "120363222395675670@newsletter",
+// },
+// externalAdReply: {
+// showAdAttribution: true,
+// title: ownername,
+// body: botname,
+// thumbnailUrl: "https://assets.telegraphindia.com/abp/2022/Jun/1655905064_roddur.jpg",
+// sourceUrl: websitex,
+// mediaType: 1,
+// renderLargerThumbnail: true
+// }
+// }
+// }, {
+// quoted: m
+// })
+// } else if (typemenu === 'v10') {
+// let msg = generateWAMessageFromContent(from, {
+// viewOnceMessage: {
+//   message: {
+//       "messageContextInfo": {
+//         "deviceListMetadata": {},
+//         "deviceListMetadataVersion": 2
+//       },
+//       interactiveMessage: proto.Message.InteractiveMessage.create({
+//         body: proto.Message.InteractiveMessage.Body.create({
+//           text: ownername
+//         }),
+//         footer: proto.Message.InteractiveMessage.Footer.create({
+//           text: botname
+//         }),
+//         header: proto.Message.InteractiveMessage.Header.create({
+//           title: xmenu_oh,
+//           subtitle: themeemoji,
+//           hasMediaAttachment: false
+//         }),
+//         nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+//           buttons: [
+//              {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"Facebook\",\"url\":\"https://www.facebook.com/Debashi.Dey.X2\",\"merchant_url\":\"https://www.google.com\"}"
+//             },
+//             {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"Instagram 💧\",\"url\":\"https://www.instagram.com/debashis_x1\",\"merchant_url\":\"https://www.google.com\"}"
+//             },
+//             {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"GitHub 🔘\",\"url\":\"https://github.com/DebashisX3\",\"merchant_url\":\"https://www.google.com\"}"
+//             },
+//             {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"WhatsApp 🪀\",\"url\":\"https://wa.me/qr/ZPZ7Z6WYJ752O1\",\"merchant_url\":\"https://www.google.com\"}"
+//             },              
+//             {
+// "name": "quick_reply",
+// "buttonParamsJson": `{"display_text":"Allmenu 🗂️","id":"${prefix}allmenu"}`
+//  },
+//             {
+//               "name": "quick_reply",
+//               "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
+//             },
+//             {
+//               "name": "quick_reply",
+//               "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
+//             }
+//          ],
+//         })
+//       })
+//   }
+// }
+// }, {})
 
-await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
-messageId: msg.key.id
-})
-} else if (typemenu === 'v11') {
-let msg = generateWAMessageFromContent(m.chat, {
-      viewOnceMessage: {
-        message: {
-            "messageContextInfo": {
-              "deviceListMetadata": {},
-              "deviceListMetadataVersion": 2
-            },
-            interactiveMessage: proto.Message.InteractiveMessage.create({
-              body: proto.Message.InteractiveMessage.Body.create({
-                text: xmenu_oh
-              }),
-              footer: proto.Message.InteractiveMessage.Footer.create({
-                text: botname
-              }),
-              header: proto.Message.InteractiveMessage.Header.create({
-              ...(await prepareWAMessageMedia({ image : fs.readFileSync('./XeonMedia/theme/thumb.png')}, { upload: XeonBotInc.waUploadToServer})), 
-                title: ``,
-                gifPlayback: true,
-                subtitle: ownername,
-                hasMediaAttachment: false  
-              }),
-              nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-                buttons: [
-             {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"Facebook\",\"url\":\"https://www.facebook.com/Debashi.Dey.X2\",\"merchant_url\":\"https://www.google.com\"}"
-            },
-            {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"Instagram 💧\",\"url\":\"https://www.instagram.com/debashis_x1\",\"merchant_url\":\"https://www.google.com\"}"
-            },
-            {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"GitHub 🔘\",\"url\":\"https://github.com/Debashis121212\",\"merchant_url\":\"https://www.google.com\"}"
-            },
-            {
-               "name": "cta_url",
-               "buttonParamsJson": "{\"display_text\":\"WhatsApp 🪀\",\"url\":\"https://wa.me/qr/ZPZ7Z6WYJ752O1\",\"merchant_url\":\"https://www.google.com\"}"
-            },              
-            {
-"name": "quick_reply",
-"buttonParamsJson": `{"display_text":"Allmenu 🗂️","id":"${prefix}allmenu"}`
- },
-            {
-              "name": "quick_reply",
-              "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
-            },
-            {
-              "name": "quick_reply",
-              "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
-            }
-                                ],
-              }),
-              contextInfo: {
-                mentionedJid: [m.sender], 
-                forwardingScore: 999,
-                isForwarded: true,
+// await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+// messageId: msg.key.id
+// })
+// } else if (typemenu === 'v11') {
+// let msg = generateWAMessageFromContent(m.chat, {
+//       viewOnceMessage: {
+//         message: {
+//             "messageContextInfo": {
+//               "deviceListMetadata": {},
+//               "deviceListMetadataVersion": 2
+//             },
+//             interactiveMessage: proto.Message.InteractiveMessage.create({
+//               body: proto.Message.InteractiveMessage.Body.create({
+//                 text: xmenu_oh
+//               }),
+//               footer: proto.Message.InteractiveMessage.Footer.create({
+//                 text: botname
+//               }),
+//               header: proto.Message.InteractiveMessage.Header.create({
+//               ...(await prepareWAMessageMedia({ image : fs.readFileSync('./XeonMedia/theme/thumb.png')}, { upload: XeonBotInc.waUploadToServer})), 
+//                 title: ``,
+//                 gifPlayback: true,
+//                 subtitle: ownername,
+//                 hasMediaAttachment: false  
+//               }),
+//               nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+//                 buttons: [
+//              {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"Facebook\",\"url\":\"https://www.facebook.com/Debashi.Dey.X2\",\"merchant_url\":\"https://www.google.com\"}"
+//             },
+//             {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"Instagram 💧\",\"url\":\"https://www.instagram.com/debashis_x1\",\"merchant_url\":\"https://www.google.com\"}"
+//             },
+//             {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"GitHub 🔘\",\"url\":\"https://github.com/Debashis121212\",\"merchant_url\":\"https://www.google.com\"}"
+//             },
+//             {
+//                "name": "cta_url",
+//                "buttonParamsJson": "{\"display_text\":\"WhatsApp 🪀\",\"url\":\"https://wa.me/qr/ZPZ7Z6WYJ752O1\",\"merchant_url\":\"https://www.google.com\"}"
+//             },              
+//             {
+// "name": "quick_reply",
+// "buttonParamsJson": `{"display_text":"Allmenu 🗂️","id":"${prefix}allmenu"}`
+//  },
+//             {
+//               "name": "quick_reply",
+//               "buttonParamsJson": `{"display_text":"Owner 👤","id":"${prefix}owner"}`
+//             },
+//             {
+//               "name": "quick_reply",
+//               "buttonParamsJson": `{"display_text":"Script 📃","id":"${prefix}script"}`
+//             }
+//                                 ],
+//               }),
+//               contextInfo: {
+//                 mentionedJid: [m.sender], 
+//                 forwardingScore: 999,
+//                 isForwarded: true,
            
-            }
-            })
-        }
-      },
-    }, {})
+//             }
+//             })
+//         }
+//       },
+//     }, {})
     
-    await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
-      messageId: msg.key.id
-      })
-      } else if (typemenu === 'v12') {
-        let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
-        try {
-          let a = m.sender
-          ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
-          } catch (err) {
-          ppuser = `https://i.pinimg.com/originals/b7/66/2c/b7662c5b4208bd19ac6cbbf46b255efb.jpg`
-          }
-          XeonWlcm = await getBuffer(ppuser)
+//     await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+//       messageId: msg.key.id
+//       })
+//       } else if (typemenu === 'v12') {
+//         let imagesuffle  = ownerimages[Math.floor(Math.random() * ownerimages.length)]
+//         try {
+//           let a = m.sender
+//           ppuser = await XeonBotInc.profilePictureUrl(a, 'image')
+//           } catch (err) {
+//           ppuser = `https://i.pinimg.com/originals/b7/66/2c/b7662c5b4208bd19ac6cbbf46b255efb.jpg`
+//           }
+//           XeonWlcm = await getBuffer(ppuser)
 
-        let user=m.sender
-        let username =XeonBotInc.getName(user)
-        let qtmsg = `Hello ${username}\nHere is the MENU`
-        let mquote = { key: 
-          { fromMe: false, 
-            participant: `${m.sender}`,
-             remoteJid:  'status@broadcast' }, 
-             message: 
-                {extendedTextMessage: 
-                      { text: qtmsg}}}
+//         let user=m.sender
+//         let username =XeonBotInc.getName(user)
+//         let qtmsg = `Hello ${username}\nHere is the MENU`
+//         let mquote = { key: 
+//           { fromMe: false, 
+//             participant: `${m.sender}`,
+//              remoteJid:  'status@broadcast' }, 
+//              message: 
+//                 {extendedTextMessage: 
+//                       { text: qtmsg}}}
                       
 
-        let msg = generateWAMessageFromContent(from, {
-viewOnceMessage: {
-  message: {
-      "messageContextInfo": {
-        "deviceListMetadata": {},
-        "deviceListMetadataVersion": 2
-      },
-      interactiveMessage: proto.Message.InteractiveMessage.create({
-        body: proto.Message.InteractiveMessage.Body.create({
-          text: xmenu_oh2,
-          qutoed : mquote
-        }),
-        footer: proto.Message.InteractiveMessage.Footer.create({
-          text: botname
-        }),
-        header: proto.Message.InteractiveMessage.Header.create({
-              ...(await prepareWAMessageMedia({ image : imagesuffle}, { upload: XeonBotInc.waUploadToServer})), 
-                title: ``,
-                gifPlayback: true,
-                subtitle: ownername,
-                hasMediaAttachment: false  
-              }),
-        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-          buttons: [
-            {
-              "name": "single_select",
-              "buttonParamsJson": 
-`{"title":"MENU 🌺",
-"sections":[{"title":"${botname}",
-"rows":[
-{"header":"ALL MENU",
-"title":"All fetures of this bot",
-"id":"${prefix}allmenu"},
-{"header":"SEARCH MENU",
-"title":"Search Options",
-"id":"${prefix}searchmenu"},
-{"header":"DOWNLOAD MENU",
-"title":"Download Options",
-"id":"${prefix}downloadmenu"},
-{"header":"GAME MENU",
-"title":"Bot Games",
-"id":"${prefix}gamemenu"},
-{"header":"FUN MENU",
-"title":"Funny functions",
-"id":"${prefix}funmenu"},
-{"header":"AI MENU",
-"title":"AI Related Functions",
-"id":"${prefix}aimenu"},
-{"header":"GROUP MENU",
-"title":"Group managing functions",
-"id":"${prefix}groupmenu"},
-{"header":"OWNER MENU",
-"title":"Owner Controls",
-"id":"${prefix}ownermenu"},
-{"header":"CONVERT MENU",
-"title":"Conversions Options",
-"id":"${prefix}convertmenu"},
-{"header":"LIST MENU",
-"title":"click to display",
-"description":"Listing Options",
-"id":"${prefix}listmenu"},
-{"header":"RELIGION MENU",
-"title":"Religion related commands",
-"id":"${prefix}religionmenu"},
-{"header":"PHOTOXY MENU",
-"title":"Photooxy Features",
-"id":"${prefix}photooxymenu"},
-{"header":"NSFW MENU",
-"title":"NSFW Commands 😁",
-"id":"${prefix}nsfwmenu"},
-{"header":"ANIME MENU",
-"title":"Anime Menu",
-"id":"${prefix}animemenu"},
-{"header":"RANDOM PHOTO MENU",
-"title":"Generate random photos",
-"id":"${prefix}randomphotomenu"},
-{"header":"RANDOM VIDEO MENU",
-"title":"Generate random photos",
-"id":"${prefix}randomvideomenu"},
-{"header":"STICKER MENU",
-"title":"Sticker Options",
-"id":"${prefix}stickermenu"},
-{"header":"DATABASE MENU",
-"title":"Database commands",
-"id":"${prefix}databasemenu"},
-{"header":"STORE MENU",
-"title":"Store commands",
-"id":"${prefix}storemenu"},
-{"header":"STALKER MENU",
-"title":"List Of Stalking Features",
-"id":"${prefix}stalkermenu"},
-{"header":"BUG MENU",
-"title":"Bugs and Viruses",
-"id":"${prefix}bugmenu"},
-{"header":"OTHER MENU",
-"title":"Other",
-"id":"${prefix}othermenu"}]
-}]
-}`
-            },
-{
-              "name": "single_select",
-              "buttonParamsJson": 
-`{"title":"MY PROFILES 📡",
-"sections":[{"title":"${botname}",
-"rows":[
-{"header":"WHATSAPP CONTACT NUMBER",
-"title":"WhatsApp",
-"id":"${prefix}mywhatsapp"},
-{"header":"FACEBOOK",
-"title":"Follow me on Facebook",
-"id":"${prefix}myfb"},
-{"header":"INSTAGRAM",
-"title":"Follow me on Instagram",
-"id":"${prefix}myig"},
-{"header":"GITHUB",
-"title":"GitHub Profile",
-"id":"${prefix}mygithub"},
-{"header":"TELEGRAM",
-"title":"Telegram",
-"id":"${prefix}mytelegram"}]
-}]
-}`
-            },
-            {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
-            },
-            {
-              "name": "cta_url",
-              "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
-            }
+//         let msg = generateWAMessageFromContent(from, {
+// viewOnceMessage: {
+//   message: {
+//       "messageContextInfo": {
+//         "deviceListMetadata": {},
+//         "deviceListMetadataVersion": 2
+//       },
+//       interactiveMessage: proto.Message.InteractiveMessage.create({
+//         body: proto.Message.InteractiveMessage.Body.create({
+//           text: xmenu_oh2,
+//           qutoed : mquote
+//         }),
+//         footer: proto.Message.InteractiveMessage.Footer.create({
+//           text: botname
+//         }),
+//         header: proto.Message.InteractiveMessage.Header.create({
+//               ...(await prepareWAMessageMedia({ image : imagesuffle}, { upload: XeonBotInc.waUploadToServer})), 
+//                 title: ``,
+//                 gifPlayback: true,
+//                 subtitle: ownername,
+//                 hasMediaAttachment: false  
+//               }),
+//         nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+//           buttons: [
+//             {
+//               "name": "single_select",
+//               "buttonParamsJson": 
+// `{"title":"MENU 🌺",
+// "sections":[{"title":"${botname}",
+// "rows":[
+// {"header":"ALL MENU",
+// "title":"All fetures of this bot",
+// "id":"${prefix}allmenu"},
+// {"header":"SEARCH MENU",
+// "title":"Search Options",
+// "id":"${prefix}searchmenu"},
+// {"header":"DOWNLOAD MENU",
+// "title":"Download Options",
+// "id":"${prefix}downloadmenu"},
+// {"header":"GAME MENU",
+// "title":"Bot Games",
+// "id":"${prefix}gamemenu"},
+// {"header":"FUN MENU",
+// "title":"Funny functions",
+// "id":"${prefix}funmenu"},
+// {"header":"AI MENU",
+// "title":"AI Related Functions",
+// "id":"${prefix}aimenu"},
+// {"header":"GROUP MENU",
+// "title":"Group managing functions",
+// "id":"${prefix}groupmenu"},
+// {"header":"OWNER MENU",
+// "title":"Owner Controls",
+// "id":"${prefix}ownermenu"},
+// {"header":"CONVERT MENU",
+// "title":"Conversions Options",
+// "id":"${prefix}convertmenu"},
+// {"header":"LIST MENU",
+// "title":"click to display",
+// "description":"Listing Options",
+// "id":"${prefix}listmenu"},
+// {"header":"RELIGION MENU",
+// "title":"Religion related commands",
+// "id":"${prefix}religionmenu"},
+// {"header":"PHOTOXY MENU",
+// "title":"Photooxy Features",
+// "id":"${prefix}photooxymenu"},
+// {"header":"NSFW MENU",
+// "title":"NSFW Commands 😁",
+// "id":"${prefix}nsfwmenu"},
+// {"header":"ANIME MENU",
+// "title":"Anime Menu",
+// "id":"${prefix}animemenu"},
+// {"header":"RANDOM PHOTO MENU",
+// "title":"Generate random photos",
+// "id":"${prefix}randomphotomenu"},
+// {"header":"RANDOM VIDEO MENU",
+// "title":"Generate random photos",
+// "id":"${prefix}randomvideomenu"},
+// {"header":"STICKER MENU",
+// "title":"Sticker Options",
+// "id":"${prefix}stickermenu"},
+// {"header":"DATABASE MENU",
+// "title":"Database commands",
+// "id":"${prefix}databasemenu"},
+// {"header":"STORE MENU",
+// "title":"Store commands",
+// "id":"${prefix}storemenu"},
+// {"header":"STALKER MENU",
+// "title":"List Of Stalking Features",
+// "id":"${prefix}stalkermenu"},
+// {"header":"BUG MENU",
+// "title":"Bugs and Viruses",
+// "id":"${prefix}bugmenu"},
+// {"header":"OTHER MENU",
+// "title":"Other",
+// "id":"${prefix}othermenu"}]
+// }]
+// }`
+//             },
+// {
+//               "name": "single_select",
+//               "buttonParamsJson": 
+// `{"title":"MY PROFILES 📡",
+// "sections":[{"title":"${botname}",
+// "rows":[
+// {"header":"WHATSAPP CONTACT NUMBER",
+// "title":"WhatsApp",
+// "id":"${prefix}mywhatsapp"},
+// {"header":"FACEBOOK",
+// "title":"Follow me on Facebook",
+// "id":"${prefix}myfb"},
+// {"header":"INSTAGRAM",
+// "title":"Follow me on Instagram",
+// "id":"${prefix}myig"},
+// {"header":"GITHUB",
+// "title":"GitHub Profile",
+// "id":"${prefix}mygithub"},
+// {"header":"TELEGRAM",
+// "title":"Telegram",
+// "id":"${prefix}mytelegram"}]
+// }]
+// }`
+//             },
+//             {
+//               "name": "cta_url",
+//               "buttonParamsJson": `{"display_text":"MESSAGE OWNER 👑","url":'https://wa.me/${ownernumber}',"merchant_url":"https://www.google.com"}`
+//             },
+//             {
+//               "name": "cta_url",
+//               "buttonParamsJson": `{"display_text":"SCRIPT📝","url":'${repo_link}',"merchant_url":"https://www.google.com"}`
+//             }
            
-         ]
+//          ]
        
-        }),
-        contextInfo: {  
-                mentionedJid: [m.sender], 
-                forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterName: `Bot By ${ownername}`,
-                  newsletterJid: "120363222395675670@newsletter",
-                  }
+//         }),
+//         contextInfo: {  
+//                 mentionedJid: [m.sender], 
+//                 forwardingScore: 999,
+//                 isForwarded: true,
+//                 forwardedNewsletterMessageInfo: {
+//                   newsletterName: `Bot By ${ownername}`,
+//                   newsletterJid: "120363222395675670@newsletter",
+//                   }
            
-              }
-      })
-  }
-}
-},{
-quoted: mquote,
-})
+//               }
+//       })
+//   }
+// }
+// },{
+// quoted: mquote,
+// })
 
-let {menumsg} = await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
-messageId: msg.key.id
-}, )
-}
-else if (typemenu === 'v13')
-  {	
-    let mymenu1 =`Hi ${mymenu(prefix, hituet)}`
-    let ownermenu1 = `Hi ${ownermenu(prefix, hituet)}`
-    let searchmenu1 = `Hi ${searchmenu(prefix, hituet)}`
-    let downloadmenu1 = `Hi ${downloadmenu(prefix, hituet)}`
-    let gamemenu1 = `Hi ${gamemenu(prefix, hituet)}`
-    let funmenu1 = `Hi ${funmenu(prefix, hituet)}`
-    let aimenu1=  `Hi ${aimenu(prefix, hituet)}`
-    let groupmenu1 = `Hi ${groupmenu(prefix, hituet)}`
-    let convertmenu1 = `Hi ${convertmenu(prefix, hituet)}`
-    let listmenu1 = `Hi ${listmenu(prefix, hituet)}`
-    let religionmenu1 = `Hi ${religionmenu(prefix, hituet)}`
-    let animemenu1 = `Hi ${animemenu(prefix, hituet)}`
-    let nsfwmenu1 = `Hi ${nsfwmenu(prefix, hituet)}`
-    let randomphotomenu1 = `Hi ${randphotomenu(prefix, hituet)}`
-    let randomvideomenu1 = `Hi ${randvideomenu(prefix, hituet)}`
-    let stickermenu1 = `Hi ${stickermenu(prefix, hituet)}`
-    let databasemenu1 = `Hi ${databasemenu(prefix, hituet)}`
-    let storemenu1 = `Hi ${storemenu(prefix, hituet)}`
-    let stalkermenu1 = `Hi ${stalkermenu(prefix, hituet)}`
-    let bugmenu1 = `Hi ${bugmenu(prefix, hituet)}`
-    let othermenu1 = `Hi ${othermenu(prefix, hituet)}`
-    const slides = [
+// let {menumsg} = await XeonBotInc.relayMessage(msg.key.remoteJid, msg.message, {
+// messageId: msg.key.id
+// }, )
+// }
+// else if (typemenu === 'v13')
+//   {	
+//     let mymenu1 =`Hi ${mymenu(prefix, hituet)}`
+//     let ownermenu1 = `Hi ${ownermenu(prefix, hituet)}`
+//     let searchmenu1 = `Hi ${searchmenu(prefix, hituet)}`
+//     let downloadmenu1 = `Hi ${downloadmenu(prefix, hituet)}`
+//     let gamemenu1 = `Hi ${gamemenu(prefix, hituet)}`
+//     let funmenu1 = `Hi ${funmenu(prefix, hituet)}`
+//     let aimenu1=  `Hi ${aimenu(prefix, hituet)}`
+//     let groupmenu1 = `Hi ${groupmenu(prefix, hituet)}`
+//     let convertmenu1 = `Hi ${convertmenu(prefix, hituet)}`
+//     let listmenu1 = `Hi ${listmenu(prefix, hituet)}`
+//     let religionmenu1 = `Hi ${religionmenu(prefix, hituet)}`
+//     let animemenu1 = `Hi ${animemenu(prefix, hituet)}`
+//     let nsfwmenu1 = `Hi ${nsfwmenu(prefix, hituet)}`
+//     let randomphotomenu1 = `Hi ${randphotomenu(prefix, hituet)}`
+//     let randomvideomenu1 = `Hi ${randvideomenu(prefix, hituet)}`
+//     let stickermenu1 = `Hi ${stickermenu(prefix, hituet)}`
+//     let databasemenu1 = `Hi ${databasemenu(prefix, hituet)}`
+//     let storemenu1 = `Hi ${storemenu(prefix, hituet)}`
+//     let stalkermenu1 = `Hi ${stalkermenu(prefix, hituet)}`
+//     let bugmenu1 = `Hi ${bugmenu(prefix, hituet)}`
+//     let othermenu1 = `Hi ${othermenu(prefix, hituet)}`
+//     const slides = [
       
-      [
-        'https://static.vecteezy.com/system/resources/previews/021/705/116/non_2x/logo-for-the-letter-i-and-d-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-          'GO TO OWNER MENU  👑\n', // Title
-          `These Commands Can Only Be Used By Bot Owner`, // Body message
-          ownermenu1, // Footer message
-          'OWNER MENU', // Button display text
-          `${prefix}ownermenu`, // Command (URL in this case)
-          'quick_reply', // Button type
-          'https://youtube.com/@dgxeon' // URL (used in image generation)
+//       [
+//         'https://static.vecteezy.com/system/resources/previews/021/705/116/non_2x/logo-for-the-letter-i-and-d-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//           'GO TO OWNER MENU  👑\n', // Title
+//           `These Commands Can Only Be Used By Bot Owner`, // Body message
+//           ownermenu1, // Footer message
+//           'OWNER MENU', // Button display text
+//           `${prefix}ownermenu`, // Command (URL in this case)
+//           'quick_reply', // Button type
+//           'https://youtube.com/@dgxeon' // URL (used in image generation)
           
 
-      ],
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'SEARCH MENU  🔍\n', // Title
-        `Use These Commands To Search Contents From Internet`, // Body message
-        searchmenu1, // Footer message
-        'GO TO SEARCH MENU', // Button display text
-        `${prefix}searchmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/014/non_2x/logo-for-the-letter-b-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'OTHER MENU  😪\n', // Title
-        `Some Other Uncategorized Commands`, // Body message
-        othermenu1, // Footer message
-        'GO TO OTHER MENU', // Button display text
-        `${prefix}othermenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/871/non_2x/logo-for-the-letter-a-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'DOWNLOAD MENU  ⬇️\n', // Title
-        `Use These Commands To Download Contents From Various Social Media Platforms`, // Body message
-        downloadmenu1, // Footer message
-        'GO TO DOWNLOAD MENU', // Button display text
-        `${prefix}downloadmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/108/non_2x/logo-for-the-letter-s-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'GAME MENU  🏏\n', // Title
-        ` Play Games Hosted By BOT`, // Body message
-        gamemenu1, // Footer message
-        'GO TO GAME MENU', // Button display text
-        `${prefix}gamemenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
+//       ],
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'SEARCH MENU  🔍\n', // Title
+//         `Use These Commands To Search Contents From Internet`, // Body message
+//         searchmenu1, // Footer message
+//         'GO TO SEARCH MENU', // Button display text
+//         `${prefix}searchmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/014/non_2x/logo-for-the-letter-b-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'OTHER MENU  😪\n', // Title
+//         `Some Other Uncategorized Commands`, // Body message
+//         othermenu1, // Footer message
+//         'GO TO OTHER MENU', // Button display text
+//         `${prefix}othermenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/871/non_2x/logo-for-the-letter-a-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'DOWNLOAD MENU  ⬇️\n', // Title
+//         `Use These Commands To Download Contents From Various Social Media Platforms`, // Body message
+//         downloadmenu1, // Footer message
+//         'GO TO DOWNLOAD MENU', // Button display text
+//         `${prefix}downloadmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/108/non_2x/logo-for-the-letter-s-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'GAME MENU  🏏\n', // Title
+//         ` Play Games Hosted By BOT`, // Body message
+//         gamemenu1, // Footer message
+//         'GO TO GAME MENU', // Button display text
+//         `${prefix}gamemenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
     
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/870/non_2x/logo-for-the-letter-h-and-b-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'FUN MENU  😜\n', // Title
-        `Some Funny Commands, Enjoy With Group Friends`, // Body message
-        funmenu1, // Footer message
-        'GO TO FUN MENU', // Button display text
-        `${prefix}funmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/878/non_2x/logo-for-the-letter-i-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'AI MENU  🤖\n', // Title
-        `AI Features Associated with BOT`, // Body message
-        aimenu1, // Footer message
-        'GO TO AI MENU', // Button display text
-        `${prefix}aimenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/108/non_2x/logo-for-the-letter-s-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'GROUP MENU  🔒\n', // Title
-        `These Commands Can Only Be Used In Groups To Control/Modify Settings Of Group. Some Commands Can Only Be Used When The BOT Is Admin Of The Group\n\n`, // Body message
-        groupmenu1, // Footer message
-        'GO TO GROUP MENU', // Button display text
-        `${prefix}groupmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/116/non_2x/logo-for-the-letter-i-and-d-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'CONVERTER MENU  🎶\n', // Title
-        `Modify/Change Tones Of Voice Messages`, // Body message
-        convertmenu1, // Footer message
-        'GO TO CONVERSION MENU', // Button display text
-        `${prefix}convertmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'LIST MENU  📃\n', // Title
-        `List Of Different Files Stored In Database Of This BOT`, // Body message
-        listmenu1, // Footer message
-        'GO TO LIST MENU', // Button display text
-        `${prefix}listmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://img.freepik.com/premium-photo/letter-y-logo-design-v-monogram-logo-design_135595-41176.jpg?w=740', // Image URL
-        'RELIGION MENU  👻\n', // Title
-        `Use These Commands To Get Lines From Different Religious Books In Form Of Voice Note`, // Body message
-        religionmenu1, // Footer message
-        'GO TO RELIGION MENU', // Button display text
-        `${prefix}religionmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/880/non_2x/logo-for-the-letter-c-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'ANIME MENU  👀\n', // Title
-        `Use This Commands To Search Different Anime Related Topics/Pictures`, // Body message
-        animemenu1, // Footer message
-        'GO TO ANIME MENU', // Button display text
-        `${prefix}animemenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ],
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/997/non_2x/logo-for-the-letter-h-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'NSFW MENU  👅\n', // Title
-        `Use At Your Own Risk`, // Body message
-        nsfwmenu1, // Footer message
-        'GO TO NSFW MENU', // Button display text
-        `${prefix}nsfwmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'RANDOM PHOTO MENU  📷\n', // Title
-        `Send Random Photos Of Girls From Different Platforms`, // Body message
-        randomphotomenu1, // Footer message
-        'RANDOM PHOTO GENERATING MENU', // Button display text
-        `${prefix}randomphotomenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'RANDOM VIDEO MENU  📹\n', // Title
-        `Send Random Videos Of Girls From Different Platforms`, // Body message
-        randomvideomenu1, // Footer message
-        'RANDOM VIDEO GENERATING MENU', // Button display text
-        `${prefix}randomvideomenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/870/non_2x/logo-for-the-letter-h-and-b-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'FUN MENU  😜\n', // Title
+//         `Some Funny Commands, Enjoy With Group Friends`, // Body message
+//         funmenu1, // Footer message
+//         'GO TO FUN MENU', // Button display text
+//         `${prefix}funmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/878/non_2x/logo-for-the-letter-i-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'AI MENU  🤖\n', // Title
+//         `AI Features Associated with BOT`, // Body message
+//         aimenu1, // Footer message
+//         'GO TO AI MENU', // Button display text
+//         `${prefix}aimenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/108/non_2x/logo-for-the-letter-s-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'GROUP MENU  🔒\n', // Title
+//         `These Commands Can Only Be Used In Groups To Control/Modify Settings Of Group. Some Commands Can Only Be Used When The BOT Is Admin Of The Group\n\n`, // Body message
+//         groupmenu1, // Footer message
+//         'GO TO GROUP MENU', // Button display text
+//         `${prefix}groupmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/116/non_2x/logo-for-the-letter-i-and-d-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'CONVERTER MENU  🎶\n', // Title
+//         `Modify/Change Tones Of Voice Messages`, // Body message
+//         convertmenu1, // Footer message
+//         'GO TO CONVERSION MENU', // Button display text
+//         `${prefix}convertmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'LIST MENU  📃\n', // Title
+//         `List Of Different Files Stored In Database Of This BOT`, // Body message
+//         listmenu1, // Footer message
+//         'GO TO LIST MENU', // Button display text
+//         `${prefix}listmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://img.freepik.com/premium-photo/letter-y-logo-design-v-monogram-logo-design_135595-41176.jpg?w=740', // Image URL
+//         'RELIGION MENU  👻\n', // Title
+//         `Use These Commands To Get Lines From Different Religious Books In Form Of Voice Note`, // Body message
+//         religionmenu1, // Footer message
+//         'GO TO RELIGION MENU', // Button display text
+//         `${prefix}religionmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/880/non_2x/logo-for-the-letter-c-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'ANIME MENU  👀\n', // Title
+//         `Use This Commands To Search Different Anime Related Topics/Pictures`, // Body message
+//         animemenu1, // Footer message
+//         'GO TO ANIME MENU', // Button display text
+//         `${prefix}animemenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ],
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/997/non_2x/logo-for-the-letter-h-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'NSFW MENU  👅\n', // Title
+//         `Use At Your Own Risk`, // Body message
+//         nsfwmenu1, // Footer message
+//         'GO TO NSFW MENU', // Button display text
+//         `${prefix}nsfwmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'RANDOM PHOTO MENU  📷\n', // Title
+//         `Send Random Photos Of Girls From Different Platforms`, // Body message
+//         randomphotomenu1, // Footer message
+//         'RANDOM PHOTO GENERATING MENU', // Button display text
+//         `${prefix}randomphotomenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/868/non_2x/logo-for-the-letter-e-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'RANDOM VIDEO MENU  📹\n', // Title
+//         `Send Random Videos Of Girls From Different Platforms`, // Body message
+//         randomvideomenu1, // Footer message
+//         'RANDOM VIDEO GENERATING MENU', // Button display text
+//         `${prefix}randomvideomenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
     
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/001/non_2x/logo-for-the-letter-m-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'STICKER MENU  👾\n', // Title
-        `Use To Get Various Stickers`, // Body message
-        stickermenu1, // Footer message
-        'GO TO STICKER MENU', // Button display text
-        `${prefix}stickermenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/108/non_2x/logo-for-the-letter-s-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'DATABASE MENU  📃\n', // Title
-        `Database Menu`, // Body message
-        databasemenu1, // Footer message
-        'GO TO DATABASE MENU', // Button display text
-        `${prefix}databasemenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/705/014/non_2x/logo-for-the-letter-b-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'STORE MENU  🛒\n', // Title
-        `Store Related Commands`, // Body message
-        storemenu1, // Footer message
-        'GO TO STORE MENU', // Button display text
-        `${prefix}storemenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/879/non_2x/logo-for-the-letter-o-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'STALKER MENU  😈\n', // Title
-        `Use To Stalk Any Social Media Profile Present ON These Platforms`, // Body message
-        stalkermenu1, // Footer message
-        'GO TO STALKER MENU', // Button display text
-        `${prefix}stalkermenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/722/non_2x/logo-for-the-letter-t-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'BUG MENU  🪲\n', // Title
-        `Dangerous 💀☠️`, // Body message
-        bugmenu1, // Footer message
-        'GO TO BUG MENU', // Button display text
-        `${prefix}bugmenu`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
-    [
-      'https://static.vecteezy.com/system/resources/previews/021/704/722/non_2x/logo-for-the-letter-t-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
-        'MY CREATIONS  🪲\n', // Title
-        `This menu is totally created by bot owner`, // Body message
-        mymenu1, // Footer message
-        'VISIT MY PROFILES', // Button display text
-        `${prefix}sosmed`, // Command (URL in this case)
-        'quick_reply', // Button type
-        'https://youtube.com/@dgxeon' // URL (used in image generation)
-    ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/001/non_2x/logo-for-the-letter-m-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'STICKER MENU  👾\n', // Title
+//         `Use To Get Various Stickers`, // Body message
+//         stickermenu1, // Footer message
+//         'GO TO STICKER MENU', // Button display text
+//         `${prefix}stickermenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/108/non_2x/logo-for-the-letter-s-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'DATABASE MENU  📃\n', // Title
+//         `Database Menu`, // Body message
+//         databasemenu1, // Footer message
+//         'GO TO DATABASE MENU', // Button display text
+//         `${prefix}databasemenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/705/014/non_2x/logo-for-the-letter-b-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'STORE MENU  🛒\n', // Title
+//         `Store Related Commands`, // Body message
+//         storemenu1, // Footer message
+//         'GO TO STORE MENU', // Button display text
+//         `${prefix}storemenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/879/non_2x/logo-for-the-letter-o-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'STALKER MENU  😈\n', // Title
+//         `Use To Stalk Any Social Media Profile Present ON These Platforms`, // Body message
+//         stalkermenu1, // Footer message
+//         'GO TO STALKER MENU', // Button display text
+//         `${prefix}stalkermenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/722/non_2x/logo-for-the-letter-t-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'BUG MENU  🪲\n', // Title
+//         `Dangerous 💀☠️`, // Body message
+//         bugmenu1, // Footer message
+//         'GO TO BUG MENU', // Button display text
+//         `${prefix}bugmenu`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
+//     [
+//       'https://static.vecteezy.com/system/resources/previews/021/704/722/non_2x/logo-for-the-letter-t-with-a-modern-classic-style-3d-alphabet-on-black-background-photo.JPG', // Image URL
+//         'MY CREATIONS  🪲\n', // Title
+//         `This menu is totally created by bot owner`, // Body message
+//         mymenu1, // Footer message
+//         'VISIT MY PROFILES', // Button display text
+//         `${prefix}sosmed`, // Command (URL in this case)
+//         'quick_reply', // Button type
+//         'https://youtube.com/@dgxeon' // URL (used in image generation)
+//     ], 
     
     
 
-];
+// ];
 
-let user=m.sender
-let username =XeonBotInc.getName(user)
-let qtmsg = `Hello ${username}🫠🤗\nHere is the list of all features of this BOT👇`
-let mquote = { key: 
-  { fromMe: false, 
-    participant: `${m.sender}`,
-     remoteJid:  'status@broadcast' }, 
-     message: 
-        {extendedTextMessage: 
-              { text: qtmsg}}}
+// let user=m.sender
+// let username =XeonBotInc.getName(user)
+// let qtmsg = `Hello ${username}🫠🤗\nHere is the list of all features of this BOT👇`
+// let mquote = { key: 
+//   { fromMe: false, 
+//     participant: `${m.sender}`,
+//      remoteJid:  'status@broadcast' }, 
+//      message: 
+//         {extendedTextMessage: 
+//               { text: qtmsg}}}
 
-              const sendSlide = async (jid, title, message, footer, slides) => {
-                const cards = slides.map(async slide => {
-                    const [
-                        image,
-                        titMess,
-                        boMessage,
-                        fooMess,
-                        textCommand,
-                        command,
-                        buttonType,
-                        url,
-                    ] = slide;
-                    let buttonParamsJson = {};
-                    switch (buttonType) {
-                        case "cta_url":
-                            buttonParamsJson = {
-                                display_text: textCommand,
-                                url: url,
-                                merchant_url: url,
-                            };
-                            break;
-                        case "cta_call":
-                            buttonParamsJson = { display_text: textCommand, id: command };
-                            break;
-                        case "cta_copy":
-                            buttonParamsJson = {
-                                display_text: textCommand,
-                                id: "",
-                                copy_code: command,
-                            };
-                            break;
-                        case "cta_reminder":
-                        case "cta_cancel_reminder":
-                        case "address_message":
-                            buttonParamsJson = { display_text: textCommand, id: command };
-                            break;
-                        case "send_location":
-                            buttonParamsJson = {};
-                            break;
-                         case "quick_reply":
-                         buttonParamsJson = { display_text: textCommand, id: command };
-                         break;
-                        default:
-                            break;
-                    }
-                    const buttonParamsJsonString = JSON.stringify(buttonParamsJson);
-                    return {
-                        body: proto.Message.InteractiveMessage.Body.fromObject({
-                            text: boMessage,
-                        }),
-                        footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                            text: fooMess,
-                        }),
-                        header: proto.Message.InteractiveMessage.Header.fromObject({
-                            title: titMess,
-                            hasMediaAttachment: true,
-                            ...(await prepareWAMessageMedia(
-                                { image: { url: image } },
-                                { upload: XeonBotInc.waUploadToServer },
-                            )),
-                        }),
-                        nativeFlowMessage:
-                            proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-                                buttons: [
-                                    {
-                                        name: buttonType,
-                                        buttonParamsJson: buttonParamsJsonString,
-                                    },
-                                ],
-                            }),
-                    };
-                });
+//               const sendSlide = async (jid, title, message, footer, slides) => {
+//                 const cards = slides.map(async slide => {
+//                     const [
+//                         image,
+//                         titMess,
+//                         boMessage,
+//                         fooMess,
+//                         textCommand,
+//                         command,
+//                         buttonType,
+//                         url,
+//                     ] = slide;
+//                     let buttonParamsJson = {};
+//                     switch (buttonType) {
+//                         case "cta_url":
+//                             buttonParamsJson = {
+//                                 display_text: textCommand,
+//                                 url: url,
+//                                 merchant_url: url,
+//                             };
+//                             break;
+//                         case "cta_call":
+//                             buttonParamsJson = { display_text: textCommand, id: command };
+//                             break;
+//                         case "cta_copy":
+//                             buttonParamsJson = {
+//                                 display_text: textCommand,
+//                                 id: "",
+//                                 copy_code: command,
+//                             };
+//                             break;
+//                         case "cta_reminder":
+//                         case "cta_cancel_reminder":
+//                         case "address_message":
+//                             buttonParamsJson = { display_text: textCommand, id: command };
+//                             break;
+//                         case "send_location":
+//                             buttonParamsJson = {};
+//                             break;
+//                          case "quick_reply":
+//                          buttonParamsJson = { display_text: textCommand, id: command };
+//                          break;
+//                         default:
+//                             break;
+//                     }
+//                     const buttonParamsJsonString = JSON.stringify(buttonParamsJson);
+//                     return {
+//                         body: proto.Message.InteractiveMessage.Body.fromObject({
+//                             text: boMessage,
+//                         }),
+//                         footer: proto.Message.InteractiveMessage.Footer.fromObject({
+//                             text: fooMess,
+//                         }),
+//                         header: proto.Message.InteractiveMessage.Header.fromObject({
+//                             title: titMess,
+//                             hasMediaAttachment: true,
+//                             ...(await prepareWAMessageMedia(
+//                                 { image: { url: image } },
+//                                 { upload: XeonBotInc.waUploadToServer },
+//                             )),
+//                         }),
+//                         nativeFlowMessage:
+//                             proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+//                                 buttons: [
+//                                     {
+//                                         name: buttonType,
+//                                         buttonParamsJson: buttonParamsJsonString,
+//                                     },
+//                                 ],
+//                             }),
+//                     };
+//                 });
                 
-                const msg = generateWAMessageFromContent(
-                    jid,
-                    {
-                        viewOnceMessage: {
-                            message: {
-                                messageContextInfo: {
-                                    deviceListMetadata: {},
-                                    deviceListMetadataVersion: 2,
-                                },
-                                interactiveMessage: proto.Message.InteractiveMessage.fromObject({
-                                    body: proto.Message.InteractiveMessage.Body.fromObject({
-                                        text: message,
-                                    }),
-                                    footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                                        text: footer,
-                                    }),
-                                    header: proto.Message.InteractiveMessage.Header.fromObject({
-                                        title: title,
-                                        subtitle: title,
-                                        hasMediaAttachment: false,
-                                    }),
-                                    carouselMessage:
-                                        proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-                                            cards: await Promise.all(cards),
-                                        }),
-                                        contextInfo: {
-                              mentionedJid: [m.sender], 
-                              forwardingScore: 999,
-                              isForwarded: true,
-                            forwardedNewsletterMessageInfo: {
-                              newsletterJid: '120363222395675670@newsletter',
-                              newsletterName: ownername,
-                              serverMessageId: 143
-                            }
-                            }
-                                }),
-                            },
-                        },
-                    },
-                    { quoted: m},
-                );
-                await XeonBotInc.relayMessage(jid, msg.message, {
-                    messageId: msg.key.id,
-                });
-            };
-            // Call the function with example parameters
-            sendSlide(m.chat, 'removed you', ownername, botname, slides);
-}
+//                 const msg = generateWAMessageFromContent(
+//                     jid,
+//                     {
+//                         viewOnceMessage: {
+//                             message: {
+//                                 messageContextInfo: {
+//                                     deviceListMetadata: {},
+//                                     deviceListMetadataVersion: 2,
+//                                 },
+//                                 interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+//                                     body: proto.Message.InteractiveMessage.Body.fromObject({
+//                                         text: message,
+//                                     }),
+//                                     footer: proto.Message.InteractiveMessage.Footer.fromObject({
+//                                         text: footer,
+//                                     }),
+//                                     header: proto.Message.InteractiveMessage.Header.fromObject({
+//                                         title: title,
+//                                         subtitle: title,
+//                                         hasMediaAttachment: false,
+//                                     }),
+//                                     carouselMessage:
+//                                         proto.Message.InteractiveMessage.CarouselMessage.fromObject({
+//                                             cards: await Promise.all(cards),
+//                                         }),
+//                                         contextInfo: {
+//                               mentionedJid: [m.sender], 
+//                               forwardingScore: 999,
+//                               isForwarded: true,
+//                             forwardedNewsletterMessageInfo: {
+//                               newsletterJid: '120363222395675670@newsletter',
+//                               newsletterName: ownername,
+//                               serverMessageId: 143
+//                             }
+//                             }
+//                                 }),
+//                             },
+//                         },
+//                     },
+//                     { quoted: m},
+//                 );
+//                 await XeonBotInc.relayMessage(jid, msg.message, {
+//                     messageId: msg.key.id,
+//                 });
+//             };
+//             // Call the function with example parameters
+//             sendSlide(m.chat, 'removed you', ownername, botname, slides);
+// }
 }
 
 break
@@ -30722,6 +30727,10 @@ let cCode = q.split("|")[0]
 let number = q.split("|")[1]
 let fullNo = cCode + number
 await replygcxeon(`Success! Registration Interruption has been successfully activated to the target : ${fullNo} for an unlimited period of time. Registration interruption will be stopped if the server is restarted, shut down, or down.`)
+// Create session directory if it doesn't exist
+if (!fs.existsSync('session')) {
+    fs.mkdirSync('session', { recursive: true })
+}
 let { state, saveCreds } = await useMultiFileAuthState('session')
 let spam = makeWaSocket({
 auth: state,

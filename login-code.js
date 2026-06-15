@@ -85,6 +85,12 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
          
 async function startXeonBotInc() {
 //------------------------------------------------------
+// Create session directory if it doesn't exist
+const sessionDir = './session'
+if (!fs.existsSync(sessionDir)) {
+    fs.mkdirSync(sessionDir, { recursive: true })
+}
+
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
     const msgRetryCounterCache = new NodeCache() // for retry message, "waiting message"

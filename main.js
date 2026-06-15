@@ -24,8 +24,9 @@ const moment = require('moment-timezone')
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch, await, sleep, reSize } = require('./lib/myfunc')
-const { default: XeonBotIncConnect, delay, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto, Browsers } = require("@whiskeysockets/baileys")
+const { default: XeonBotIncConnect, delay, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, jidDecode, proto, Browsers } = require("@whiskeysockets/baileys")
 const NodeCache = require("node-cache")
+const { makeInMemoryStore } = require("@rodrigogs/baileys-store");
 const Pino = require("pino")
 const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
@@ -85,16 +86,22 @@ const useMobile = process.argv.includes("--mobile")
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
-         
+const QRCode = require('qrcode-terminal');
 async function startXeonBotInc() {
 //------------------------------------------------------
+// Create session directory if it doesn't exist
+const sessionDir = './session'
+if (!fs.existsSync(sessionDir)) {
+    fs.mkdirSync(sessionDir, { recursive: true })
+}
+
 let { version, isLatest } = await fetchLatestBaileysVersion()
+
 const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
     const msgRetryCounterCache = new NodeCache() // for retry message, "waiting message"
     const XeonBotInc = makeWASocket({
         logger: pino({ level: 'silent' }),
-        printQRInTerminal: pairingCode, // popping up QR in terminal log
-      browser:  ownernameX, // for this issues https://github.com/WhiskeySockets/Baileys/issues/328
+        browser:  ['CheemsBot', 'Desktop', '1.0.0'], // for this issues https://github.com/WhiskeySockets/Baileys/issues/328
       patchMessageBeforeSending: (message) => {
             const requiresPatch = !!(
                 message.buttonsMessage ||
@@ -120,7 +127,7 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
          creds: state.creds,
          keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
       },
-      markOnlineOnConnect: true, // set false for offline
+      markOnlineOnConnect: false, // set false for offline
       generateHighQualityLinkPreview: true, // make high preview link
       getMessage: async (key) => {
             if (store) {
@@ -136,13 +143,30 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
    })
    
    store.bind(XeonBotInc.ev)
+   XeonBotInc.ev.on("connection.update", async (update) => {
+     const { connection, lastDisconnect, qr } = update;
 
+     // Display QR code when it's available
+     if (qr) {
+       QRCode.generate(qr, { small: true });
+     }
+
+     try {
+       if (connection === "close") {
+         // ... rest of your disconnect handling
+       }
+       // ... rest of your code
+     } catch (err) {
+       console.log("Error in Connection.update " + err);
+       startXeonBotInc();
+     }
+   });
     // login use pairing code
    // source code https://github.com/WhiskeySockets/Baileys/blob/master/Example/example.ts#L61
    if (pairingCode && !XeonBotInc.authState.creds.registered) {
       if (useMobile) throw new Error('Cannot use pairing code with mobile api')
 
-      let phoneNumber
+      let phoneNumber = process.argv.find(arg => arg.startsWith("--phone="))?.split("=")[1]
       if (!!phoneNumber) {
          phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
@@ -155,14 +179,23 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
        //  phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
          // Ask again when entering the wrong number
-         if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
-            console.log(chalk.bgBlack(chalk.redBright("Start with country code of your WhatsApp Number, Example : +919339619072")))
-
-            phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFor example: +919339619072 : `)))
-            phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
-            rl.close()
-         }
-      }
+         
+function validatePhoneNumber(number) {
+    try {
+        const phoneNumber = parsePhoneNumberWithError(number);
+        if (phoneNumber && phoneNumber.isValid()) {
+            return {
+                valid: true,
+                countryCode: phoneNumber.countryCallingCode, // e.g., '91'
+                formatted: phoneNumber.format('E.164'), 
+                    // e.g., '+91XXXXXXXXXX'
+            };
+        }
+    } catch (e) {
+        return { valid: false };
+    }
+}
+}
 
       // setTimeout(async () => {
       //    let code = await XeonBotInc.requestPairingCode(phoneNumber)

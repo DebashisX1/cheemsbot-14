@@ -7,10 +7,11 @@
 //WhatsApp: +919339619072
 //want more free bot scripts? subscribe to my youtube channel: https://youtube.com/@DGXeon
 
+const http = require('http');
 const {
    spawn
-} = require('child_process')
-const path = require('path')
+} = require('child_process');
+const path = require('path');
 
 function start() {
    let args = [path.join(__dirname, 'main.js'), ...process.argv.slice(2)]
@@ -23,12 +24,12 @@ function start() {
             console.log('Restarting Bot...')
             p.kill()
             start()
-            delete p
          }
       })
       .on('exit', code => {
          console.error('Exited with code:', code)
          if (code == '.' || code == 1 || code == 0) start()
       })
+   
 }
 start()
