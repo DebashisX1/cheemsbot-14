@@ -10,7 +10,9 @@
         "media": "XeonMedia"
     },
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "build": "echo \"Build complete\"",
+        "vercel-build": "npm run build"
     },
     "author": "DGXeon",
     "license": "MIT",
