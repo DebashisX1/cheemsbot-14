@@ -1,0 +1,47 @@
+:root {
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --accent: #38bdf8;
+  --panel: rgba(15, 23, 42, 0.92);
+}
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1e293b, #0f172a 45%);
+  color: var(--text);
+}
+body {
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+.page {
+  max-width: 620px;
+  width: 100%;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.55);
+}
+h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: #f8fafc;
+}
+p {
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+.box {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.8);
+}
+code {
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 0.15em 0.4em;
+  border-radius: 0.35em;
+}
